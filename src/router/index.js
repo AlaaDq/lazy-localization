@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import Test from '../views/Test.vue'
+import {i18n} from '/src/i18nCustom'
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,6 +10,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
   },
   {
     path: '/about',
@@ -20,6 +26,8 @@ const routes = [
   }
 ]
 
+
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -27,3 +35,22 @@ const router = new VueRouter({
 })
 
 export default router
+// mergeLocaleMessage
+
+router.beforeEach((to, from, next) => {
+  if(to.path=="/test")
+  {
+   const file= to.path.substring(1)//or use route name 
+    //check if the file already exist in store register by getters includes
+    // register the new merged in store (i18n.locale,file) 
+    // `@/locales/${$i18n.locale}/${to.path}.json
+    //or axios to backend api get json file
+    import(`@/locales/${file}.json`).then((msgs)=>{
+      i18n.mergeLocaleMessage(i18n.locale,msgs.default || msgs)
+      next()
+    })
+  }
+  else{
+    next()
+  }
+})
