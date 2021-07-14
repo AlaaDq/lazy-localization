@@ -6,6 +6,12 @@ import store from './store'
 // import i18n from './i18n'
 import {i18n} from './i18nCustom'
 
+// neccery for third way of load trans
+import(/* webpackChunkName: "lang-[request]" */ `@/locales/ar`).then(msgs => {
+  i18n.setLocaleMessage('ar', msgs.default)
+})
+
+
 Vue.config.productionTip = false
 
 new Vue({
