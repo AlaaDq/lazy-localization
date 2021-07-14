@@ -43,9 +43,12 @@ router.beforeEach((to, from, next) => {
    const file= to.path.substring(1)//or use route name 
     //check if the file already exist in store register by getters includes
     // register the new merged in store (i18n.locale,file) 
-    // `@/locales/${$i18n.locale}/${to.path}.json
+    // `@/locales/${i18n.locale}/${to.path}.json`
+    // `@/locales/${file}.json`
     //or axios to backend api get json file
-    import(`@/locales/${file}.json`).then((msgs)=>{
+    const currentLang =i18n.locale;
+    // or import both ar en trans files of the page
+    import(`@/locales/${currentLang}/${file}.json`).then((msgs)=>{
       i18n.mergeLocaleMessage(i18n.locale,msgs.default || msgs)
       next()
     })
