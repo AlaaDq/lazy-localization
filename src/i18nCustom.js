@@ -17,6 +17,10 @@ export const languagesAvailable = ['en', 'ar', 'de']
 function setI18nLanguage (lang) {
   i18n.locale = lang
   document.querySelector('html').setAttribute('lang', lang)
+  if(lang=='ar')
+  document.querySelector('html').setAttribute('dir', 'rtl')
+  if(lang=='en')
+  document.querySelector('html').setAttribute('dir', 'ltr')
   return lang
 }
 

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Test from '../views/Test.vue'
 import {i18n,loadLanguageAsync} from '/src/i18nCustom'
 
 Vue.use(VueRouter)
@@ -15,7 +14,7 @@ const routes = [
   {
     path: '/test',
     name: 'Test',
-    component: Test
+    component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue')
   },
   {
     path: '/about',

@@ -6,6 +6,13 @@ import store from './store'
 // import i18n from './i18n'
 import {i18n} from './i18nCustom'
 
+
+if(i18n.locale=='ar')
+document.querySelector('html').setAttribute('dir', 'rtl')
+if(i18n.locale=='en')
+document.querySelector('html').setAttribute('dir', 'ltr')
+
+
 // neccery for third way of load trans
 import(/* webpackChunkName: "lang-[request]" */ `@/locales/ar`).then(msgs => {
   i18n.setLocaleMessage('ar', msgs.default)
